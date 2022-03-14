@@ -477,7 +477,36 @@ In[7] f(-1)                                  # évaluation de la fonction
 
 ## L'instruction `def`
 
-L'instruction `def` est une instruction permettant d'instancier des fonctions, très souvent préférable à l'usage d'une fonction `lambda` de par sa lisibilité.
+L'instruction `def` est une instruction permettant d'instancier des fonctions, très souvent préférable à l'usage d'une fonction `lambda` de par sa lisibilité. Prenons l'exemple de la fonction élévation au carré.
+
+```python
+In[] def carre(x):
+...      return x**2
+```
+
+Une version pleinement documentée de la même fonction serait : 
+
+```python
+In[] def carre(x: float = 1) -> float:
+...      """ Calcul le carré du nombre x.
+...          
+...          PARAMETRES:
+...          -----------
+...          x : float, valeur de l'argument
+...
+...          RETOURS:
+...          --------
+...          x**2 : float 
+...
+...          EXEMPLES:
+...          ---------
+...          >>> carre(-1)
+...          1 """
+...
+...       return x**2
+```
+
+On note que `x: float` n'est qu'une indication, de même que `-> float`. Le programme s'exécute malgré la violation de ces "règles", qui n'en sont donc pas ; par exemple, `carre(1j)` renvoie `-1`, ce qui est mathématiquement juste, mais du point de vue de la documentation ne va pas. La seule contrainte est que l'opérateur `**` soit défini pour l'argument prescrit. Ainsi déclarée, appeler la fonction `help(carre)` renvoie la chaîne de caractère proposée ainsi que le squelette de la fonction.
 
 # Les graphes
 
@@ -498,17 +527,11 @@ In[7] 3 * 'a'                                  # duplication
 'aaa'
 
 In[8] 'a' is 'a'                               # test d'identité
-True
 In[9] 'a' == 'a'                               # test d'égalité
-True
 In[10] 'a' <= 'abc'                            # test d'inclusion large
-True
 In[11] 'a' < 'abc'                             # test d'inclusion stricte
-True
 In[12] 'a' >= 'abc'                            # test d'inclusion large
-False
 In[13] 'a' > 'abc'                             # test d'inclusion stricte
-False
 In[14] 'abc'.startswith('a')                   # test d'appartenance
 True
 In[15] 'b' in 'abc'                            # test d'appartenance
