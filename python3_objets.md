@@ -14,6 +14,8 @@
   - [L'instruction `def`](#linstruction-def)
 - [Les graphes](#les-graphes)
 - [Les chaînes de caractères : `str`](#les-chaînes-de-caractères--str)
+- [Interlude sur `numpy`](#interlude-sur-numpy)
+- [Les vecteurs : `numpy.ndarray` de dimension 1](#les-vecteurs--numpyndarray-de-dimension-1)
 
 Aide-mémoire composé par Julien VALENTIN en mars 2022.
 
@@ -561,21 +563,54 @@ True
 In[27] '1101'.isdigit()                        # test booléen de caractères entiers naturels
 True
 
-In[]   'abacad'.count('a')                     # compte le nombre d'occurences du caractère 'a'
+In[28] 'abacad'.count('a')                     # compte le nombre d'occurences du caractère 'a'
 3
-In[28] 'abc'.capitalize()                      # rend la première lettre capitale
+In[29] 'abc'.capitalize()                      # rend la première lettre capitale
 'Abc'
-In[29] 'pi is the most popular number'.title() # capitalise chaque première lettre suivant un espace
+In[30] 'pi is the most popular number'.title() # capitalise chaque première lettre suivant un espace
 'Pi Is The Most Popular Number'
-In[30] 'AbC'.casefold()                        # ?
+In[31] 'AbC'.casefold()                        # ?
 'abc'
-In[31] 'AbC'.swapcase()                        # inverse la casse
+In[32] 'AbC'.swapcase()                        # inverse la casse
 'aBc'
-In[32] 'AbC'.lower()                           # en miniscule
+In[33] 'AbC'.lower()                           # en miniscule
 'abc'
-In[33] 'AbC'.upper()                           # en capitale
+In[34] 'AbC'.upper()                           # en capitale
 'ABC'
 
-In[34] 'pi\t=\t3.1415'.expandtabs()            # affiche les tabulations
+In[35] 'pi\t=\t3.1415'.expandtabs()            # affiche les tabulations
 'pi      =       3.1415'
+```
+
+# Interlude sur `numpy`
+
+`Numpy` est une librairie disponible en `Python` développée pour l'analyse numérique ou statistique de haute performance. Cette librairie propose essentiellement trois choses : vingt-quatre manières de représenter les objets abstraits en mémoire, les scalaires ; l'objet `dtype` qui permet de structurer les objets en mémoire, et les `ndarray` qui sont très généralement des conteneurs de données. Il se trouve que ce dernier correspond très bien à la représentation des objets de l'algèbre linéaire et de l'analyse numérique, mais son usage est largement plus répandu que ces deux applications là.
+
+```python
+In[1] import numpy
+In[2] array.ndim                      # nombre de dimensions, ou d'axes
+In[3] array.shape                     # tuple de nombres de composantes par dimension
+In[4] len(array)                      # nombre d'éléments selon l'axe 0 (lignes)
+In[5] len(array[0])                   # nombre d'éléments selon l'axe 1 (colonnes)
+In[6] len(array[0][0])                # nombre d'éléments selon l'axe 2 ...
+In[7] array.nbytes                    # nombre d'octets nécessaires pour le stockage
+In[8] array.reshape((k,l,m))          # change la taille du tableau (ici sur 3 axes)
+In[9] array.dtype                     # type donné aux entrées du tableau
+In[10] array.astype(str)              # convertit les entrées du tableau en str
+In[11] array.copy()                   # renvoie une copie du tableau
+In[12] np.hstack((u, v))              # assemble en ligne les vecteurs u et v (concaténation)
+In[13] np.hstack([u, v])              #    "          "          "            "            "
+In[14] np.concatenate((u, v), axis=0) #    "          "          "            "            "
+In[15] np.concatenate([u, v], axis=0) #    "          "          "            "            "
+In[16] np.vstack((u, v))              # superpose les vecteurs u et v en colonne
+In[17] np.vstack([u, v])              #    "          "          "            "
+In[18] np.concatenate((u, v), axis=1) #    "          "          "            "
+In[19] np.concatenate([u, v], axis=1) #    "          "          "            "
+In[20] array[i,j,k]                   # valeur de l'entrée ligne i, colonne j, profondeur k ...
+```
+
+# Les vecteurs : `numpy.ndarray` de dimension 1
+
+```python
+
 ```
