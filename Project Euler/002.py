@@ -1,18 +1,19 @@
-def problem2(L, p):
+from math import sqrt
 
-    def suivant(i, j):
-        return i + j
+def problem2(L):
+
+    def fib(n):
+        "Implémente la formule de Binet"
+        return int( ( ( (1 + sqrt(5))/2 )**n - ( (1 - sqrt(5))/2 )**n ) / sqrt(5) )
 
     S = 0
-    k = 0
-    l = 1
-    m = suivant(k, l)
-    while m < L:
-        if m % p == 0:
-            S += m
-        k = l
-        l = m
-        m = suivant(k, l)
+    i = 3
+    f = fib(i)
+    while f < L:
+        print(f)
+        S += f
+        i += 3
+        f  = fib(i)
     return S
 
-print(problem2(4000000000, 2))
+print(problem2(4000000))

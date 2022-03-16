@@ -1,8 +1,10 @@
 Mes solutions aux problèmes archivés sur [ProjectEuler.net](https://projecteuler.net/).
 
-| **Problème** | **Résolu ?** |
-|--------------|--------------|
-| 1            | Non          |
+| **Problème** | **Résolu le** |
+|--------------|---------------|
+| 1            | 16/03/2022    |
+| 2            | 16/03/2022    |
+| 3            | 
 
 --- 
 
@@ -66,8 +68,6 @@ On note
 
 ### Solution naïve
 
-Il suffit de construire récursivement les éléments de la suite de Fibonacci tant que leur valeur n'excède pas $4.000.000.000$ et de sommer ceux qui sont pairs.
-
 ```python
 def problem2(L, p):
 
@@ -86,10 +86,38 @@ def problem2(L, p):
         m = suivant(k, l)
     return S
 
-print(problem2(4000000000, 2))
+print(problem2(4000000, 2))
 ```
 
-La somme cherchée est $$ \boxed{ S = 1485607536 } $$
+La somme cherchée est $$ \boxed{ S = 4.613.732 } $$
+
+### Un peu plus élégant
+
+```python
+from math import sqrt
+
+def problem2(L):
+
+    def fib(n):
+        "Implémente la formule de Binet"
+        return int( ( ( (1 + sqrt(5))/2 )**n - ( (1 - sqrt(5))/2 )**n ) / sqrt(5) )
+
+    S = 0
+    i = 3
+    f = fib(i)
+    while f < L:
+        print(f)
+        S += f
+        i += 3
+        f  = fib(i)
+    return S
+
+print(problem2(4000000))
+```
+
+renvoie
+
+$$ \boxed{ S = 4.613.732 } $$
 
 ## Problème 3
 
