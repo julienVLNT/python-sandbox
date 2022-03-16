@@ -6,6 +6,7 @@ Mes solutions aux problèmes de [The Python Challenge](http://www.pythonchalleng
 | 1            | [clic](http://www.pythonchallenge.com/pc/def/map.html) |
 
 ---
+
 # Résultats <!-- omit in toc -->
 
 - [Problème 0 : "Warmup"](#problème-0--warmup)

@@ -1,9 +1,9 @@
 Mes solutions aux problèmes archivés sur [ProjectEuler.net](https://projecteuler.net/).
 
-| **Problème** | **Résolu le** |
-|--------------|---------------|
-| 1            | 16/03/2022    |
-| 2            | 16/03/2022    |
+| **Problème** | **Résolu ?**    |
+|--------------|-----------------|
+| 1            | ✓ 16/03/2022    |
+| 2            | ✓ 16/03/2022    |
 | 3            | 
 
 --- 
