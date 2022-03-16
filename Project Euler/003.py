@@ -10,17 +10,19 @@ def probleme3(L):
                 drapeau = False
         return drapeau
 
-    def facteurListe(i):
-        l = list()
-        for j in range(i):
+    def facteurs(i):
+        liste = list()
+        for j in range(2, floor(i/2)+1):
+            if i == 1: break
             if estPremier(j):
                 if i % j == 0:
-                    l.append(j)
+                    liste.append(j)
                     i = i/j
-        return l
+                    while(i%j==0):
+                        i = i/j
+        return liste
 
-    liste = facteurListe(L)
-    print(f"La liste des facteurs premiers du cas test est\n{liste}")
+    liste = facteurs(L)
     return liste[-1]
 
-print("\n", probleme3(13195))
+print(probleme3(600851475143))

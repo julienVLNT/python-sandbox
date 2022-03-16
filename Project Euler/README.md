@@ -1,10 +1,11 @@
 Mes solutions aux problèmes archivés sur [ProjectEuler.net](https://projecteuler.net/).
 
-| **Problème** | **Résolu ?**    |
-|--------------|-----------------|
-| 1            | ✓ 16/03/2022    |
-| 2            | ✓ 16/03/2022    |
-| 3            | 
+| **Problème** | **Résolu ?**  |
+|--------------|---------------|
+| 1            | ✓ 16/03/2022  |
+| 2            | ✓ 16/03/2022  |
+| 3            | ✓ 16/03/2022  |
+| 4            | 
 
 --- 
 
@@ -18,7 +19,9 @@ Mes solutions aux problèmes archivés sur [ProjectEuler.net](https://projecteul
   - [Un peu plus élégant](#un-peu-plus-élégant-1)
 - [Problème 3](#problème-3)
   - [Solution naïve](#solution-naïve-2)
-  - [Améliorer `estPremier()`](#améliorer-estpremier)
+  - [Beaucoup plus efficace sans beaucoup d'efforts](#beaucoup-plus-efficace-sans-beaucoup-defforts)
+- [Problème 4](#problème-4)
+  - [Solution naïve](#solution-naïve-3)
 
 ## Problème 1
 
@@ -136,9 +139,11 @@ $$ \boxed{ S = 4.613.732 } $$
 
 On note
 
-- `L` le nombre à factoriser : $600851475143$
+- `L` le nombre à factoriser : $600.851.475.143$
 
 ### Solution naïve
+
+La solution naïve consiste à parcourir les entiers entre $2$ et $(L/2)+1$. Ainsi, dès qu'un entier est premier, on teste s'il divise $L$. Dans ce cas, on l'ajoute à la liste et alors on peut diviser $L$ par ce nombre et continuer les tests.
 
 ```python
 from math import floor, sqrt
@@ -153,16 +158,16 @@ def probleme3(L):
                 drapeau = False
         return drapeau
 
-    def facteurListe(i):
-        l = list()
+    def facteurs(i):
+        liste = list()
         for j in range(i):
             if estPremier(j):
                 if i % j == 0:
-                    l.append(j)
+                    liste.append(j)
                     i = i/j
-        return l
+        return liste
 
-    liste = facteurListe(L)
+    liste = facteurs(L)
     print(f"La liste des facteurs premiers du cas test est\n{liste}")
     return liste[-1]
 
@@ -171,5 +176,59 @@ print("\n", probleme3(13195))
 
 Cet algorithme fonctionne sur le cas test, on trouve comme liste `[5, 7, 13, 29]` et la solution renvoyée par `probleme3(13195)` est bien $29$. Cependant, le nombre cité par le problème est bien trop grand pour le factoriser de la sorte (exécution > 15 min). Heureusement, il y a des pistes d'amélioration.
 
-### Améliorer `estPremier()`
+### Beaucoup plus efficace sans beaucoup d'efforts
 
+En fait, il suffisait de continuer à diviser $L$ par le nombre premier trouvé pour le réduire encore ; dès que $L = 1$, la factorisation est terminée. Il est raisonnable d'espérer un énorme gain en temps d'exécution.
+
+```python
+from math import floor, sqrt
+
+def probleme3(L):
+
+    def estPremier(i):
+        drapeau = True
+        if i < 2: drapeau = False
+        for j in range(2, floor(sqrt(i))+1):
+            if i % j == 0:
+                drapeau = False
+        return drapeau
+
+    def facteurs(i):
+        liste = list()
+        for j in range(2, floor(i/2)+1):
+            if i == 1: break    # Astuce
+            
+            if estPremier(j):
+                if i % j == 0:
+                    liste.append(j)
+                    i = i/j
+                    while(i%j==0):    # division en cascade
+                        i = i/j
+        
+        return liste
+
+    liste = facteurs(L)
+    return liste[-1]
+
+print(probleme3(600851475143))
+```
+
+renvoie comme plus grand facteur $$ \boxed{ p = 6857 } $$
+
+## Problème 4
+
+- [énoncé](https://projecteuler.net/problem=4)
+
+On note
+
+- `N` le nombre de chiffres, $N = 3$.
+
+### Solution naïve
+
+```python
+def probleme4(N):
+    return None
+
+assert probleme4(2) == 9009
+print(probleme4(3))
+```
