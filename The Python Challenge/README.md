@@ -6,7 +6,10 @@ Mes solutions aux problèmes de [The Python Challenge](http://www.pythonchalleng
 | 1            | [clic](http://www.pythonchallenge.com/pc/def/map.html) |
 
 ---
-# Résultats
+# Résultats <!-- omit in toc -->
+
+- [Problème 0 : "Warmup"](#problème-0--warmup)
+- [Problème 1](#problème-1)
 
 ## Problème 0 : "Warmup"
 
@@ -38,3 +41,5 @@ On obtient
 >>> clair
 'i"hope"you"didnt"tr{nsl{te"it"|y"h{nd0"th{ts"wh{t"computers"{re"for0"doing"it"in"|y"h{nd"is"inefficient"{nd"th{t)s"why"this"text"is"so"long0"using"string0m{ketr{ns*+"is"recommended0"now"{pply"on"the"url0'
 ```
+
+Ce n'est pas diablement efficace.

@@ -8,7 +8,17 @@ Mes solutions aux problèmes archivés sur [ProjectEuler.net](https://projecteul
 
 --- 
 
-# Solutions
+# Solutions <!-- omit in toc -->
+
+- [Problème 1](#problème-1)
+  - [Solution naïve](#solution-naïve)
+  - [Un peu plus élégant](#un-peu-plus-élégant)
+- [Problème 2](#problème-2)
+  - [Solution naïve](#solution-naïve-1)
+  - [Un peu plus élégant](#un-peu-plus-élégant-1)
+- [Problème 3](#problème-3)
+  - [Solution naïve](#solution-naïve-2)
+  - [Améliorer `estPremier()`](#améliorer-estpremier)
 
 ## Problème 1
 
