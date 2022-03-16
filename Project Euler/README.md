@@ -63,6 +63,7 @@ La somme $S$ cherchée est $$ \boxed{ S = 233168 } $$
 - [énoncé](https://projecteuler.net/problem=2)
 
 On note
+
 - `L` la borne supérieure des valeurs $4.000.000.000$
 - `p` la valeur du modulo $2$
 
@@ -122,3 +123,43 @@ $$ \boxed{ S = 4.613.732 } $$
 ## Problème 3
 
 - [énoncé](https://projecteuler.net/problem=3)
+
+On note
+
+- `L` le nombre à factoriser : $600851475143$
+
+### Solution naïve
+
+```python
+from math import floor, sqrt
+
+def probleme3(L):
+
+    def estPremier(i):
+        drapeau = True
+        if i < 2: drapeau = False
+        for j in range(2, floor(sqrt(i))+1):
+            if i % j == 0:
+                drapeau = False
+        return drapeau
+
+    def facteurListe(i):
+        l = list()
+        for j in range(i):
+            if estPremier(j):
+                if i % j == 0:
+                    l.append(j)
+                    i = i/j
+        return l
+
+    liste = facteurListe(L)
+    print(f"La liste des facteurs premiers du cas test est\n{liste}")
+    return liste[-1]
+
+print("\n", probleme3(13195))
+```
+
+Cet algorithme fonctionne sur le cas test, on trouve comme liste `[5, 7, 13, 29]` et la solution renvoyée par `probleme3(13195)` est bien $29$. Cependant, le nombre cité par le problème est bien trop grand pour le factoriser de la sorte (exécution > 15 min). Heureusement, il y a des pistes d'amélioration.
+
+### Améliorer `estPremier()`
+
