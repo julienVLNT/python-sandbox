@@ -2,7 +2,7 @@ Mes solutions aux problèmes de [The Python Challenge](http://www.pythonchalleng
 
 | **Problème** | **URL**                                                | **Résolu ?** |
 |--------------|--------------------------------------------------------|--------------|
-| 0            | [clic](http://www.pythonchallenge.com/pc/def/0.html)   | ✓            |
+| 0            | [clic](http://www.pythonchallenge.com/pc/def/0.html)   | ✓ 16/03/2002 |
 | 1            | [clic](http://www.pythonchallenge.com/pc/def/map.html) |
 
 ---
