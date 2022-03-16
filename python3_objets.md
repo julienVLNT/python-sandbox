@@ -16,6 +16,7 @@
 - [Les chaînes de caractères : `str`](#les-chaînes-de-caractères--str)
 - [Interlude sur `numpy`](#interlude-sur-numpy)
 - [Les vecteurs : `numpy.ndarray` de dimension 1](#les-vecteurs--numpyndarray-de-dimension-1)
+- [Les matrices : `numpy.ndarray` de dimension 2](#les-matrices--numpyndarray-de-dimension-2)
 
 Aide-mémoire composé par Julien VALENTIN en mars 2022.
 
@@ -489,23 +490,23 @@ In[] def carre(x):
 Une version pleinement documentée de la même fonction serait : 
 
 ```python
-In[] def carre(x: float = 1) -> float:
-...      """ Calcul le carré du nombre x.
-...          
-...          PARAMETRES:
-...          -----------
-...          x : float, valeur de l'argument
+In[1] def carre(x: float) -> float:
+...       """ Calcul le carré du nombre x.
+...           
+...           PARAMETRES:
+...           -----------
+...           x : float, valeur de l'argument
 ...
-...          RETOURS:
-...          --------
-...          x**2 : float 
+...           RETOURS:
+...           --------
+...           x**2 : float 
 ...
-...          EXEMPLES:
-...          ---------
-...          >>> carre(-1)
-...          1 """
+...           EXEMPLES:
+...           ---------
+...           >>> carre(-1)
+...           1 """
 ...
-...       return x**2
+...        return x**2
 ```
 
 On note que `x: float` n'est qu'une indication, de même que `-> float`. Le programme s'exécute malgré la violation de ces "règles", qui n'en sont donc pas ; par exemple, `carre(1j)` renvoie `-1`, ce qui est mathématiquement juste, mais du point de vue de la documentation ne va pas. La seule contrainte est que l'opérateur `**` soit défini pour l'argument prescrit. Ainsi déclarée, appeler la fonction `help(carre)` renvoie la chaîne de caractère proposée ainsi que le squelette de la fonction.
@@ -612,5 +613,100 @@ In[20] array[i,j,k]                   # valeur de l'entrée ligne i, colonne j, 
 # Les vecteurs : `numpy.ndarray` de dimension 1
 
 ```python
+In[] import numpy as np
+In[] np.empty(n)                  # vecteur de n composantes "vide" /!\
+In[] np.zeros(n)                  # vecteur de n composantes initilisées à 0.
+In[] np.ones(n)                   # vecteur de n composantes initilisées à 1.
+In[] np.empty_like(v)             # copie la dimension et le nombre de composante de v
+In[] np.zeros_like(v)             #   "        "       "        "        "        "
+In[] np.ones_like(v)              #   "        "       "        "        "        "
 
+In[] +v                           # identité
+In[] -v                           # opposé
+In[] np.linalg.norm(v,1)          # norme "1" sur l'espace vectoriel
+In[] np.linalg.norm(v)            # norme euclidienne ("2") sur l'espace vecoriel
+In[] np.linalg.norm(v, np.inf)    # norme "max" sur l'espace vectoriel
+In[] np.linalg.norm(u-v,1)        # distance "1" sur l'espace vectoriel
+In[] np.linalg.norm(u-v)          # distance euclidienne ("2") sur l'espace vectoriel
+In[] np.linalg.norm(u-v, np.inf)  # norme "max" sur l'espace vectoriel
+
+In[] u + v                        # addition vectorielle
+In[] u - v                        # soustraction vectorielle
+In[] mu * u                       # multiplication par un scalaire mu
+
+In[] u * v                        # multiplication composante par composante
+In[] np.einsum('i,i->i', u, v)    # multiplication composante par composante
+
+In[] u @ v                        # produit scalaire
+In[] np.inner(u, v)               # produit scalaire
+In[] np.einsum('i,i->', u, v)     # produit scalaire
+
+In[] np.kron(u, v)                # produit de Kronecker
+
+In[] np.outer(u, v)               # produit extérieur, ou tensoriel
+In[] np.tensordot(u, v, axes=0)   # produit extérieur, ou tensoriel
+In[] np.einsum('i,j->ij', u, v)   # produit extérieur, ou tensoriel
+
+In[] u is v                       # test d'identité
+In[] np.allclose(u,v,eps)         # test d'égalité des vecteurs à la précision eps près
+In[] np.all(u > 0)                # test : True <=> "u[i] > 0" pour tout i ; False sinon
+In[] np.any(u > 0)                # test : True <=> "u[i] > 0" pour au moins un i ; False sinon
+In[] u == v                       # test d'égalité composante par composante (vecteur booléen : b[i] = True si u[i] <= v[i] False sinon)
+In[] u <= v                       # test inférieur ou égal à (vecteur booléen)
+In[] u < v                        # test strictement inférieur à (vecteur booléen)
+In[] u >= v                       # test supérieur ou égal à (vecteur booléen)
+In[] u > v                        # test strictement supérieur à (vecteur booléen)
+
+In[] np.argmin(u)                 # indexe de la plus petite composante du vecteur
+In[] np.argmax(u)                 # indexe de la plus grande composante du vecteur
+In[] np.argwhere(u<0)             # vecteur colonne des indexes pour lesquels u[i] < 0
+```
+
+# Les matrices : `numpy.ndarray` de dimension 2
+
+```python
+In[] import numpy as np
+In[] np.empty((m,n))              # matrice m x n "vide" /!\
+In[] np.zeros((m,n))              # initialisation à 0. d'une matrice m x n
+In[] np.ones((m,n))               # initialisation à 1. d'une matrice m x n
+In[] np.empty_like(M)             # copie la taille de M
+In[] np.zeros_like(M)             # copie la taille de M
+In[] np.ones_like(M)              # copie la taille de M
+
+In[] +M                           # identité
+In[] -M                           # opposée
+In[] np.linalg.norm(M)            # norme euclidienne sur Mat(m,n) (c.f section précédente pour les variantes)
+In[] np.linalg.norm(M-N)          # distance euclidienne sur Mat(m,n) (c.f section précédente pour les variantes)
+
+In[] np.transpose(M)              # transposée de M
+In[] M.T                          # transposée de M
+
+In[] M + N                        # addition matricielle
+In[] M - N                        # soustraction matricielle
+In[] mu * M                       # produit par un scalaire mu
+
+In[] M * N                        # multiplication composante par composante, produit "de Hadamard" ou "de Schur"
+In[] np.einsum('ij,ij->ij', M, N) # multiplication composante par composante, produit "de Hadamard" ou "de Schur"
+
+In[] M @ N                        # produit matriciel
+In[] np.dot(M, N)                 # produit matriciel
+In[] np.tensordot(M, N, axes=1)   # produit matriciel
+In[] np.einsum('ij,jk->ik', M, N) # produit matriciel
+
+In[] np.inner(M, N)               # produit intérieur
+In[] np.einsum('ij,kj->ik', M, N) # produit intérieur
+
+In[] np.kron(M, N)                # produit de Kronecker
+
+In[] np.outer(M, N)               # produit extérieur, ou tensoriel
+
+In[] M is N                       # test d'identité
+In[] np.allclose(M,N,eps)         # test d'égalité des vecteurs à la précision eps près
+In[] np.all(M > 0)                # test : True <=> "M[i,j] > 0" pour tout (i,j) ; False sinon
+In[] np.any(M > 0)                # test : True <=> "M[i,j] > 0" pour au moins un (i,j) ; False sinon
+In[] M == N                       # test d'égalité composante par composante (vecteur booléen : b[i,j] = True si M[i,j] <= N[i,j] False sinon)
+In[] M <= N                       # test inférieur ou égal à (vecteur booléen)
+In[] M < N                        # test strictement inférieur à (vecteur booléen)
+In[] M >= N                       # test supérieur ou égal à (vecteur booléen)
+In[] M > N                        # test strictement supérieur à (vecteur booléen)
 ```
