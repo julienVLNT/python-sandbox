@@ -221,12 +221,22 @@ renvoie comme plus grand facteur $$ \boxed{ p = 6857 } $$
 
 On note
 
-- `N` le nombre de chiffres, $N = 3$.
+- `L` le nombre de chiffres, $L = 3$.
 
 ### Solution naïve
 
+Un palindrome à $4$ chiffres s'écrit, dans le système décimal, 
+
+$$ a_0 10^3 + a_1 10^2 + a_1 10^1 + a_0 10^0 $$
+
+De même, un palindrome à $6$ chiffres s'écrit
+
+$$ a_0 10^5 + a_1 10^4 + a_2 10^3 + a_2 10^2 + a_1 10 + a_0 $$
+
+Les construire demande d'itérer sur trois variables, chaque $a_i$ parcourant la liste $\{0, 1, \dots, 9\}$.
+
 ```python
-def probleme4(N):
+def probleme4(L):
     return None
 
 assert probleme4(2) == 9009
