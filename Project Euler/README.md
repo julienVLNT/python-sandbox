@@ -5,7 +5,8 @@ Mes solutions aux problèmes archivés sur [ProjectEuler.net](https://projecteul
 | 1            | ✓ 16/03/2022  |
 | 2            | ✓ 16/03/2022  |
 | 3            | ✓ 16/03/2022  |
-| 4            | 
+| 4            | ✓ 17/03/2022  |
+| 5            | 
 
 --- 
 
@@ -21,7 +22,9 @@ Mes solutions aux problèmes archivés sur [ProjectEuler.net](https://projecteul
   - [Solution naïve](#solution-naïve-2)
   - [Beaucoup plus efficace sans beaucoup d'efforts](#beaucoup-plus-efficace-sans-beaucoup-defforts)
 - [Problème 4](#problème-4)
-  - [Solution naïve](#solution-naïve-3)
+  - [Une première solution](#une-première-solution)
+- [Problème 5](#problème-5)
+  - [Solution](#solution)
 
 ## Problème 1
 
@@ -223,7 +226,7 @@ On note
 
 - `L` le nombre de chiffres, $L = 3$.
 
-### Solution naïve
+### Une première solution
 
 Un palindrome à $4$ chiffres s'écrit, dans le système décimal, 
 
@@ -233,12 +236,60 @@ De même, un palindrome à $6$ chiffres s'écrit
 
 $$ a_0 10^5 + a_1 10^4 + a_2 10^3 + a_2 10^2 + a_1 10 + a_0 $$
 
-Les construire demande d'itérer sur trois variables, chaque $a_i$ parcourant la liste $\{0, 1, \dots, 9\}$.
+Les construire demande d'itérer sur trois variables, chaque $a_i$ parcourant la liste $\{0, 1, \dots, 9\}$. On ordonne la liste dans l'ordre décroissant.
 
 ```python
 def probleme4(L):
+    
+    def palindrome2():
+        liste = list()
+        for a0 in range(1, 10):
+            for a1 in range(10):
+                    liste.append(a0*10**3 + a1*10**2 + a1*10 + a0)
+        liste.sort(reverse=True)
+        return liste
+
+    def palindrome3():
+        "Renvoie la liste des palindromes à six chiffres."
+        liste = list()
+        for a0 in range(1, 10):
+            for a1 in range(10):
+                for a2 in range(10):
+                    liste.append(a0*10**5 + a1*10**4 + a2*10**3 + a2*10**2 + a1*10 + a0)
+        liste.sort(reverse=True)
+        return liste
+
+    generateur = palindrome3 if L == 3 else palindrome2 if L == 2 else None
+    for p in generateur():
+        for m in range(10**L-1, 10**(L-1)-1, -1):
+            q, r = p // m, p % m
+            if r == 0 and q < 10**L and q > 10**(L-1):
+                return p
     return None
+    
 
 assert probleme4(2) == 9009
 print(probleme4(3))
+```
+
+Le programme ci-dessus rend $$ \boxed{ P = 906609 } $$
+
+## Problème 5
+
+- [énoncé](https://projecteuler.net/problem=5)
+
+On note
+
+- `L` la borne supérieur des diviseurs , $L = 20$
+
+### Solution
+
+On cherche le plus petit nombre divisible par chaque entier compris entr $1$ et $20$ inclus. Il suffit de construire la liste des décompositions en facteurs premiers de chaque entier dans la liste $\{1, \dots, L\}$ et de construire le produit des facteurs apparaissant dans l'ensemble de ces factorisations, élevés à la puissance la plus forte.
+
+```python
+def probleme5(L):
+    return None
+
+assert probleme5(10) == 2520
+print(probleme5(20))
 ```
