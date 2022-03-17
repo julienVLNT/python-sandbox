@@ -664,6 +664,8 @@ In[] np.argwhere(u<0)             # vecteur colonne des indexes pour lesquels u[
 
 # Les matrices : `numpy.ndarray` de dimension 2
 
+Veiller à ce que les dimensions des matrices sont compatibles.
+
 ```python
 In[] import numpy as np
 In[] np.empty((m,n))              # matrice m x n "vide" /!\
@@ -678,8 +680,19 @@ In[] -M                           # opposée
 In[] np.linalg.norm(M)            # norme euclidienne sur Mat(m,n) (c.f section précédente pour les variantes)
 In[] np.linalg.norm(M-N)          # distance euclidienne sur Mat(m,n) (c.f section précédente pour les variantes)
 
+In[] np.linalg.matrix_rank(M)     # rang de la matrice M
+
 In[] np.transpose(M)              # transposée de M
 In[] M.T                          # transposée de M
+
+In[] np.triu(M)                   # matrice dont les entrées sont celles de la partie triangulaire supérieure de M
+In[] np.triu_indices(entier)      # indices de la partie triangulaire supérieure d'une matrice ayant <entier> colonnes
+In[] np.triu_indices(liste)       # indices des parties triangulaires supérieures de blocs d'une matrice, imbriqués, de tailles <liste[0]>, <liste[1]> ...
+In[] np.triu_indices_from(M)      # indices de la partie triangulaire supérieure de la matrice M
+In[] np.tril(M)                   # matrice dans les entrées sont celles de la partie triangulaire inférieure de M
+In[] np.tril_indices(entier)      # indices de la partie triangulaire inférieure d'une matrice ayant <entier> colonnes
+In[] np.tril_indices(liste)       # indices des parties triangulaires inférieures de blocs d'une matrice, imbriqués, de tailles <liste[0]>, <liste[1]> ...
+In[] np.tril_indices_from(M)      # indices de la partie triangulaire inférieure de la matrice M
 
 In[] M + N                        # addition matricielle
 In[] M - N                        # soustraction matricielle
