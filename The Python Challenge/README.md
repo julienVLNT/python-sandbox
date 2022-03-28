@@ -3,7 +3,8 @@ Mes solutions aux problèmes de [The Python Challenge](http://www.pythonchalleng
 | **Problème** | **URL**                                                | **Résolu ?** |
 |--------------|--------------------------------------------------------|--------------|
 | 0            | [clic](http://www.pythonchallenge.com/pc/def/0.html)   | ✓ 16/03/2002 |
-| 1            | [clic](http://www.pythonchallenge.com/pc/def/map.html) |
+| 1            | [clic](http://www.pythonchallenge.com/pc/def/map.html) | ✓ 25/03/2002 |
+| 2            | [clic](http://www.pythonchallenge.com/pc/def/ocr.html) | 
 
 ---
 
@@ -11,6 +12,7 @@ Mes solutions aux problèmes de [The Python Challenge](http://www.pythonchalleng
 
 - [Problème 0 : "Warmup"](#problème-0--warmup)
 - [Problème 1](#problème-1)
+- [Problème 2](#problème-2)
 
 ## Problème 0 : "Warmup"
 
@@ -43,4 +45,32 @@ On obtient
 'i"hope"you"didnt"tr{nsl{te"it"|y"h{nd0"th{ts"wh{t"computers"{re"for0"doing"it"in"|y"h{nd"is"inefficient"{nd"th{t)s"why"this"text"is"so"long0"using"string0m{ketr{ns*+"is"recommended0"now"{pply"on"the"url0'
 ```
 
-Ce n'est pas diablement efficace.
+Ce n'est pas diablement efficace. Le problème vient du fait que seuls les $26$ premiers caractères sont des lettres, si bien que les caractères dont le code est $25$ ou $26$ sont envoyés sur des symboles. Pour ces deux caractères, il est nécessaire de leur associer respectivement les codes $1$ et $2$.
+
+```python
+>>> clair  = ''.join([chr(((ord(car) + 2) - ord('a')) % 26 + ord('a')) if car >= 'a' and car <= 'z' else car for car in crypte])
+>>> clair
+"i hope you didnt translate it by hand. thats what computers are for. doing it in by hand is inefficient and that's why this text is so long. using string.maketrans() is recommended. now apply on the url."
+```
+
+La suggestion d'utiliser la méthode pour les chaînes de caractères : `maketrans()`, se fait ainsi
+
+```python
+>>> table1 = "abcdefghijklmnopqrstuvwxyz"
+>>> table2 = "cdefghijklmnopqrstuvwxyzab"
+>>> clef = str.maketrans(table1, table2)
+
+>>> clair = crypte.translate(clef)
+>>> clair
+"i hope you didnt translate it by hand. thats what computers are for. doing it in by hand is inefficient and that's why this text is so long. using string.maketrans() is recommended. now apply on the url."
+```
+
+Cela nous donne, appliqué au mot crypté `map`:
+
+```python
+>>> "map".translate(clef)
+'ocr'
+```
+
+## Problème 2
+
