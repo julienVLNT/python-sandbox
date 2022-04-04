@@ -6,7 +6,10 @@ Mes solutions aux problèmes archivés sur [ProjectEuler.net](https://projecteul
 | 2            | ✓ 16/03/2022  |
 | 3            | ✓ 16/03/2022  |
 | 4            | ✓ 17/03/2022  |
-| 5            | 
+| 5            | ✓ 01/04/2022  |
+| 6            | ✓ 04/04/2022  |
+| 7            | ✓ 04/04/2022  |
+| 8            |  |
 
 --- 
 
@@ -278,18 +281,43 @@ Le programme ci-dessus rend $$ \boxed{ P = 906609 } $$
 
 - [énoncé](https://projecteuler.net/problem=5)
 
-On note
-
-- `L` la borne supérieur des diviseurs , $L = 20$
-
 ### Solution
 
 On cherche le plus petit nombre divisible par chaque entier compris entr $1$ et $20$ inclus. Il suffit de construire la liste des décompositions en facteurs premiers de chaque entier dans la liste $\{1, \dots, L\}$ et de construire le produit des facteurs apparaissant dans l'ensemble de ces factorisations, élevés à la puissance la plus forte.
 
-```python
-def probleme5(L):
-    return None
+Les nombres premiers inférieurs à $20$ sont $2$, $3$, $5$, $7$, $11$, $13$, $17$ et $19$. D'autre part, on écrit les décompositions des autres nombres
 
-assert probleme5(10) == 2520
-print(probleme5(20))
+|                    |                   |                   |            |                      |
+|--------------------|-------------------|-------------------|------------|----------------------|
+| $4 = 2^2$          | $6 = 2 \times 3$  | $8 = 2^3$         | $9=3^2$    | $10 = 2 \times 5$    |
+| $12 = 2^2 \times 3 | $14 = 2 \times 7$ | $15 = 3 \times 5$ | $16 = 2^4$ | $18 = 2 \times 3^2$  |
+
+D'où le résultat :
+
+```python
+>>> 2**4 * 3**2 * 5 * 7 * 11 * 13 * 17 * 19
+232792560
 ```
+
+## Problème 6
+
+- [énoncé](https://projecteuler.net/problem=6)
+
+### Solution
+
+Le carré de la somme des entiers inférieurs ou égaux à $100$ s'écrit $$ S = \left( \frac{100 \times 101}{2} \right)^2 $$ D'autre part, on prétend que la somme des mêmes entiers élevés au carré s'exprime $$ \frac{100 \times 101 \times 201}{6} = \frac{100^3}{3} - \frac{100^2}{2} + \frac{100}{6} $$ d'où le résultat
+
+```python
+>>> (100*101/2)**2 - (100**3)/3 + (100**2)/2 - 100/6
+25174150
+```
+
+## Problème 7
+
+- [énoncé](https://projecteuler.net/problem=7)
+
+La réponse donnée par [PrimePage](https://primes.utm.edu/nthprime/algorithm.php) est $104743$
+
+## Problème 8
+
+- [énoncé](https://projecteuler.net/problem=8)
